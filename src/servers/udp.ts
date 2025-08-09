@@ -1,7 +1,7 @@
 import dgram from "node:dgram";
 import { type ClientPacket, clientPacket } from "$types/client";
 import type { ServerPacket } from "$types/server";
-import { FORCE_VERSION, PORT } from "$utils/env";
+import { ALLOWED_VERSIONS, PORT } from "$utils/env";
 import { lobbies } from "$utils/lobbies";
 import { matchmaking } from "$utils/matchmaking";
 import { compareRemoteInfo } from "$utils/others";
@@ -22,7 +22,7 @@ server.on("message", async (msg, rinfo) => {
 			return;
 		}
 
-		if (FORCE_VERSION && version !== FORCE_VERSION) {
+		if (ALLOWED_VERSIONS.length && !ALLOWED_VERSIONS.includes(version)) {
 			return reply({
 				type: "incorrect_version",
 				data: "Incorrect version",

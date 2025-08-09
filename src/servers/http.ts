@@ -1,10 +1,10 @@
-import { FORCE_VERSION, PORT, REGIONS } from "$utils/env";
+import { DISPLAY_VERSION, PORT, REGIONS } from "$utils/env";
 
 const server = Bun.serve({
 	port: PORT,
 	fetch() {
 		return Response.json({
-			latest_version: FORCE_VERSION || "0.0.0",
+			latest_version: DISPLAY_VERSION,
 			regions: REGIONS,
 		});
 	},
