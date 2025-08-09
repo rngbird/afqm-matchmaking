@@ -7,13 +7,13 @@ import { _ } from "./others";
 
 /*
 	Redis
+		[Number keys]
+			afqm:match_id = match id, incrementing up by 1
+		[String keys]
+			afqm:match_accepted:<match id>:<"IPv4"/"IPv6">:<ip address>:<port> = "1" (true)
 		[JSON keys]
 			afqm:match:<match id> = [RemoteInfo, RemoteInfo]
 */
-
-const acceptedMatches = new Set<string>();
-
-let lastMatchId = 0;
 
 export const matchmaking = {
 	/** Queue a user into matchmaking */
@@ -100,22 +100,27 @@ export const matchmaking = {
 	},
 	/** Check if the match for the rinfo was already given. If not, set it as accepted. */
 	async accept({ id, rinfo }: { id: number; rinfo: RemoteInfo }) {
+		// If match was already accepted, return false
 		if (
-			acceptedMatches.has(
-				_`${id}:${rinfo.family}:${rinfo.address}:${rinfo.port}`,
+			await redis.get(
+				_`afqm:match_accepted:${id}:${rinfo.family}:${rinfo.address}:${rinfo.port}`,
 			)
 		) {
 			return false;
 		}
 
-		acceptedMatches.add(
-			_`${id}:${rinfo.family}:${rinfo.address}:${rinfo.port}`,
+		// If match wasn't already accepted, return true
+		await redis.set(
+			_`afqm:match_accepted:${id}:${rinfo.family}:${rinfo.address}:${rinfo.port}`,
+			"1",
+			"EX",
+			60, // expire in a minute
 		);
 		return true;
 	},
 	/** Create a match */
 	async create({ rinfos }: { rinfos: [RemoteInfo, RemoteInfo] }) {
-		const id = lastMatchId++;
+		const id = await redis.incr("afqm:match_id");
 		await redis.setJson(_`afqm:match:${id}`, rinfos, "EX", 60); // expires in a minute
 		return id;
 	},

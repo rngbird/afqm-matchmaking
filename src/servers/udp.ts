@@ -154,6 +154,13 @@ server.on("message", async (msg, rinfo) => {
 					return;
 				}
 
+				// If already accepted, return nothing
+				const didNotAlreadyAccept = await matchmaking.accept({
+					id: matchId,
+					rinfo,
+				});
+				if (!didNotAlreadyAccept) return;
+
 				// Set the leader and send the rinfo to the user
 				const isLeader = compareRemoteInfo(match.rinfos[0], rinfo);
 				const opponentRinfo = isLeader ? match.rinfos[1] : match.rinfos[0];
