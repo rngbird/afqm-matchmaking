@@ -1,0 +1,29 @@
+{
+	"name": "jafm-matchmaking",
+	"module": "src/index.ts",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"start": "bun .",
+		"dev": "bun --watch .",
+		"check": "biome check --write ./",
+		"schema/push": "drizzle-kit push",
+		"schema/generate": "drizzle-kit generate",
+		"schema/migrate": "drizzle-kit migrate"
+	},
+	"devDependencies": {
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5.9.2"
+	},
+	"dependencies": {
+		"@biomejs/biome": "^2.1.4",
+		"@types/pg": "^8.15.5",
+		"cron-schedule": "^5.0.4",
+		"drizzle-kit": "^0.31.4",
+		"drizzle-orm": "^0.44.4",
+		"pg": "^8.16.3",
+		"zod": "^4.0.16"
+	}
+}
