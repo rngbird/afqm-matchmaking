@@ -1,8 +1,8 @@
 import { defineConfig } from "drizzle-kit";
-import { PG_URL } from "./src/utils/env";
+import { SQLITE_FILE } from "$utils/env";
 
 export default defineConfig({
 	schema: "./schema/**/*",
-	dialect: "postgresql",
-	dbCredentials: { url: PG_URL },
+	dialect: "sqlite",
+	dbCredentials: { url: SQLITE_FILE },
 });

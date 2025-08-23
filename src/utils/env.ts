@@ -1,5 +1,5 @@
 export const PORT = Number.parseInt(process.env.PORT);
-export const PG_URL = process.env.PG_URL;
+export const SQLITE_FILE = process.env.SQLITE_FILE;
 export const REGIONS = process.env.REGIONS?.length
 	? process.env.REGIONS.split(",")
 	: ["MODDED"];
@@ -12,7 +12,7 @@ declare global {
 	namespace NodeJS {
 		interface ProcessEnv {
 			PORT: string;
-			PG_URL: string;
+			SQLITE_FILE: string;
 			REGIONS?: string;
 			DISPLAY_VERSION?: string;
 			ALLOWED_VERSIONS?: string;

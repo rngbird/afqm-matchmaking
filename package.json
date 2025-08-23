@@ -12,18 +12,19 @@
 		"schema/migrate": "drizzle-kit migrate"
 	},
 	"devDependencies": {
+		"@types/better-sqlite3": "^7.6.13",
 		"@types/bun": "latest"
 	},
 	"peerDependencies": {
 		"typescript": "^5.9.2"
 	},
 	"dependencies": {
-		"@biomejs/biome": "^2.1.4",
-		"@types/pg": "^8.15.5",
+		"@biomejs/biome": "^2.2.2",
+		"@libsql/client": "^0.15.12",
 		"cron-schedule": "^5.0.4",
 		"drizzle-kit": "^0.31.4",
 		"drizzle-orm": "^0.44.4",
-		"pg": "^8.16.3",
-		"zod": "^4.0.16"
+		"ioredis-mock": "^8.9.0",
+		"zod": "^4.1.0"
 	}
 }

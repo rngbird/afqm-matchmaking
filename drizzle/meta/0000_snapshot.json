@@ -1,74 +1,81 @@
 {
-	"id": "043151c0-ebdf-4dca-9c42-a476dd08aad7",
-	"prevId": "00000000-0000-0000-0000-000000000000",
-	"version": "7",
-	"dialect": "postgresql",
-	"tables": {
-		"public.matchmaking_queue": {
-			"name": "matchmaking_queue",
-			"schema": "",
-			"columns": {
-				"version": {
-					"name": "version",
-					"type": "text",
-					"primaryKey": false,
-					"notNull": true
-				},
-				"address": {
-					"name": "address",
-					"type": "text",
-					"primaryKey": false,
-					"notNull": true
-				},
-				"family": {
-					"name": "family",
-					"type": "text",
-					"primaryKey": false,
-					"notNull": true
-				},
-				"port": {
-					"name": "port",
-					"type": "integer",
-					"primaryKey": false,
-					"notNull": true
-				},
-				"region": {
-					"name": "region",
-					"type": "text",
-					"primaryKey": false,
-					"notNull": true
-				},
-				"expires_in": {
-					"name": "expires_in",
-					"type": "timestamp",
-					"primaryKey": false,
-					"notNull": true,
-					"default": "now() + interval '15 seconds'"
-				}
-			},
-			"indexes": {},
-			"foreignKeys": {},
-			"compositePrimaryKeys": {
-				"matchmaking_queue_version_address_family_port_pk": {
-					"name": "matchmaking_queue_version_address_family_port_pk",
-					"columns": ["version", "address", "family", "port"]
-				}
-			},
-			"uniqueConstraints": {},
-			"policies": {},
-			"checkConstraints": {},
-			"isRLSEnabled": false
-		}
-	},
-	"enums": {},
-	"schemas": {},
-	"sequences": {},
-	"roles": {},
-	"policies": {},
-	"views": {},
-	"_meta": {
-		"columns": {},
-		"schemas": {},
-		"tables": {}
-	}
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "d03d3752-2d99-47ec-a38b-45709454afa2",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "matchmaking_queue": {
+      "name": "matchmaking_queue",
+      "columns": {
+        "version": {
+          "name": "version",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "address": {
+          "name": "address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "family": {
+          "name": "family",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "port": {
+          "name": "port",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "region": {
+          "name": "region",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "expires_in": {
+          "name": "expires_in",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(strftime('%s','now')+15)"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "matchmaking_queue_version_address_family_port_pk": {
+          "columns": [
+            "version",
+            "address",
+            "family",
+            "port"
+          ],
+          "name": "matchmaking_queue_version_address_family_port_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
 }

@@ -29,7 +29,7 @@
 		// Paths
 		"baseUrl": ".",
 		"paths": {
-			"$schema": ["src/connectors/psql/schema"],
+			"$schema": ["src/connectors/sqlite/schema"],
 			"$schema/*": ["schema/*"],
 			"$*": ["src/*"]
 		}

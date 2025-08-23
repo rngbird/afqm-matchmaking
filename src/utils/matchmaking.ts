@@ -1,6 +1,6 @@
 import { and, eq, gt, ne, or, sql } from "drizzle-orm";
-import { db } from "$connectors/psql";
 import { redis } from "$connectors/redis";
+import { db } from "$connectors/sqlite";
 import { matchmakingQueue } from "$schema/matchmaking";
 import type { RemoteInfo } from "$types/remote";
 import { _ } from "./others";
@@ -43,7 +43,7 @@ export const matchmaking = {
 					matchmakingQueue.family,
 					matchmakingQueue.port,
 				],
-				set: { region, expiresIn: sql`now() + interval '15 seconds'` },
+				set: { region, expiresIn: sql`(strftime('%s','now') + 15)` },
 			});
 	},
 	/** Unqueue from matchmaking */
@@ -80,7 +80,7 @@ export const matchmaking = {
 						ne(matchmakingQueue.address, rinfo.address),
 						ne(matchmakingQueue.port, rinfo.port),
 					),
-					gt(matchmakingQueue.expiresIn, sql`now()`),
+					gt(matchmakingQueue.expiresIn, sql`strftime('%s','now')`),
 				),
 			)
 			.returning({

@@ -1,13 +1,12 @@
+import { sql } from "drizzle-orm/sql";
 import {
 	integer,
-	pgTable,
 	primaryKey,
+	sqliteTable,
 	text,
-	timestamp,
-} from "drizzle-orm/pg-core";
-import { sql } from "drizzle-orm/sql";
+} from "drizzle-orm/sqlite-core";
 
-export const matchmakingQueue = pgTable(
+export const matchmakingQueue = sqliteTable(
 	"matchmaking_queue",
 	{
 		version: text("version").notNull(),
@@ -15,9 +14,9 @@ export const matchmakingQueue = pgTable(
 		family: text("family").notNull().$type<"IPv4" | "IPv6">(),
 		port: integer("port").notNull(),
 		region: text("region").notNull(),
-		expiresIn: timestamp("expires_in", { mode: "date" })
+		expiresIn: integer("expires_in", { mode: "timestamp" })
 			.notNull()
-			.default(sql`now() + interval '15 seconds'`), // expires in 15 seconds
+			.default(sql`(strftime('%s','now')+15)`),
 	},
 	(table) => [
 		primaryKey({
