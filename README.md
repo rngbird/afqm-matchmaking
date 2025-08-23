@@ -1,4 +1,4 @@
-# Custom matchmaking server for [A Few Quick Matchs](https://store.steampowered.com/app/3805420/A_Few_Quick_Matches/)
+# Custom matchmaking server for [A Few Quick Matches](https://store.steampowered.com/app/3805420/A_Few_Quick_Matches/)
 
 This is a custom matchmaking server for the game [A Few Quick Matchs](https://store.steampowered.com/app/3805420/A_Few_Quick_Matches/).
 
